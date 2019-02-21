@@ -49,6 +49,7 @@ module NetSuite
       end
 
       def response_body
+        puts "hi"
         @response_body ||= response_hash[:base_ref]
       end
 
