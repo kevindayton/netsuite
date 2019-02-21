@@ -74,6 +74,7 @@ module NetSuite
       module Support
         def add(credentials={})
           response = NetSuite::Actions::Add.call([self], credentials)
+          puts response.inspect
           puts response.body.gets
           @errors = response.errors
 
