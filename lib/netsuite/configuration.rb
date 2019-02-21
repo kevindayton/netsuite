@@ -15,6 +15,7 @@ module NetSuite
     end
 
     def connection(params={}, credentials={})
+      puts params.inspect
       client = Savon.client({
         wsdl: cached_wsdl || wsdl,
         read_timeout: read_timeout,
