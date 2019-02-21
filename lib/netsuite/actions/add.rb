@@ -13,6 +13,7 @@ module NetSuite
       private
 
       def request(credentials={})
+        puts request_body.inspect
         NetSuite::Configuration.connection({}, credentials).call(:add, :message => request_body)
       end
 
@@ -49,7 +50,6 @@ module NetSuite
       end
 
       def response_body
-        puts "hi test"
         @response_body ||= response_hash[:base_ref]
       end
 
