@@ -73,7 +73,6 @@ module NetSuite
 
       module Support
         def add(credentials={})
-          raise ArgumentError.new("You messed up!")
           response = NetSuite::Actions::Add.call([self], credentials)
           puts response.inspect
           puts response.body.string
