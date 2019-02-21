@@ -17,8 +17,6 @@ module NetSuite
 
       def call(credentials={})
         @response = request(credentials)
-        puts @response
-        raise ArgumentError, "stop it!"
         build_response
       end
 
@@ -29,6 +27,9 @@ module NetSuite
       end
 
       def build_response
+        puts response_body
+        raise ArgumentError, "stop it!"
+        
         Response.new(success: success?, header: response_header, body: response_body, errors: response_errors)
       end
 
