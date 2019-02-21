@@ -7,7 +7,6 @@ module NetSuite
       attr_reader :response_hash
 
       def initialize(object = nil)
-        puts object
         @object = object
       end
 

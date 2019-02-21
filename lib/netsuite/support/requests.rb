@@ -10,7 +10,6 @@ module NetSuite
 
         def call(options, credentials={})
           raise ArgumentError, "options should be an array" unless options.is_a?(Array)
-          puts options
           new(*options).call(credentials)
         end
 
@@ -18,6 +17,8 @@ module NetSuite
 
       def call(credentials={})
         @response = request(credentials)
+        puts @response
+        raise ArgumentError, "stop it!"
         build_response
       end
 
