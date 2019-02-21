@@ -73,9 +73,8 @@ module NetSuite
 
       module Support
         def add(credentials={})
-          puts "add"
           response = NetSuite::Actions::Add.call([self], credentials)
-
+          puts response
           @errors = response.errors
 
           if response.success?
