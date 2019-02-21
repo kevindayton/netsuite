@@ -9,8 +9,8 @@ module NetSuite
       module ClassMethods
 
         def call(options, credentials={})
-          raise ArgumentError.new("You messed up!")
           raise ArgumentError, "options should be an array" unless options.is_a?(Array)
+          puts options
           new(*options).call(credentials)
         end
 
