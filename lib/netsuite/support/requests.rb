@@ -27,7 +27,7 @@ module NetSuite
       end
 
       def build_response
-        puts response_body
+        puts response_body.inspect
         raise ArgumentError, "stop it!"
         
         Response.new(success: success?, header: response_header, body: response_body, errors: response_errors)
