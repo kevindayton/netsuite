@@ -371,4 +371,41 @@ describe NetSuite::Configuration do
     end
   end
 
+  describe "#log" do
+    it 'allows a file path to be set as the log destination' do
+      file_path = Tempfile.new.path
+      config.log = file_path
+      config.logger.info "foo"
+
+      log_contents = open(file_path).read
+      expect(log_contents).to include("foo")
+    end
+
+    it 'allows an IO device to bet set as the log destination' do
+      stream = StringIO.new
+      config.log = stream
+      config.logger.info "foo"
+
+      expect(stream.string).to include("foo")
+    end
+  end
+
+  describe 'timeouts' do
+    it 'has defaults' do
+      expect(config.read_timeout).to eql(60)
+      expect(config.open_timeout).to be_nil
+    end
+
+    it 'sets timeouts' do
+      config.read_timeout = 100
+      config.open_timeout = 60
+
+      expect(config.read_timeout).to eql(100)
+      expect(config.open_timeout).to eql(60)
+
+      # ensure no exception is raised
+      config.connection
+    end
+  end
+
 end

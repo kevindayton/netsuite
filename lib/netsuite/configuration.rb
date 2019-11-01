@@ -19,6 +19,7 @@ module NetSuite
       client = Savon.client({
         wsdl: cached_wsdl || wsdl,
         read_timeout: read_timeout,
+        open_timeout: open_timeout,
         namespaces: namespaces,
         soap_header: auth_header(credentials).update(soap_header),
         pretty_print_xml: true,
@@ -327,6 +328,18 @@ module NetSuite
       end
     end
 
+    def open_timeout=(timeout)
+      attributes[:open_timeout] = timeout
+    end
+
+    def open_timeout(timeout = nil)
+      if timeout
+        self.open_timeout = timeout
+      else
+        attributes[:open_timeout]
+      end
+    end
+
     def log=(path)
       attributes[:log] = path
     end
@@ -338,7 +351,10 @@ module NetSuite
 
     def logger(value = nil)
       if value.nil?
-        attributes[:logger] ||= ::Logger.new((log && !log.empty?) ? log : $stdout)
+        # if passed a IO object (like StringIO) `empty?` won't exist
+        valid_log = log && !(log.respond_to?(:empty?) && log.empty?)
+
+        attributes[:logger] ||= ::Logger.new(valid_log ? log : $stdout)
       else
         attributes[:logger] = value
       end
