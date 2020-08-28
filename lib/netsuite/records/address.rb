@@ -4,10 +4,14 @@ module NetSuite
       include Support::Fields
       include Support::Records
       include Namespaces::PlatformCommon
+      include Support::Actions
+      
 
       # internalId is a bit strange on this record
       # https://github.com/NetSweet/netsuite/wiki/Miscellaneous-Web-Services-Quirks#customer
 
+      actions :get, :get_list, :add, :update, :delete, :search, :upsert
+      
       fields :addr1, :addr2, :addr3, :addressee, :addr_phone, :attention, :city, :internal_id, :override, :state, :zip
 
       field :country, NetSuite::Support::Country

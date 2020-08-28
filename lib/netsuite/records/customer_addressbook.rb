@@ -15,6 +15,7 @@ module NetSuite
       # NOTE API < 2014_2
       fields :attention, :addressee, :phone, :addr1, :addr2, :addr3, :city, :zip, :override, :state
       field :country, NetSuite::Support::Country
+      field :custom_field_list, CustomFieldList
       read_only_fields :addr_text
 
       # NOTE API >= 2014_2
