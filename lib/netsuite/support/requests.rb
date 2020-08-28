@@ -27,8 +27,6 @@ module NetSuite
       end
 
       def build_response
-        puts response_body.inspect
-        
         Response.new(success: success?, header: response_header, body: response_body, errors: response_errors)
       end
 

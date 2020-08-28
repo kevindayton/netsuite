@@ -13,7 +13,6 @@ module NetSuite
       private
 
       def request(credentials={})
-        puts "hello!" # request_body.inspect
         NetSuite::Configuration.connection({}, credentials).call(:add, :message => request_body)
       end
 
