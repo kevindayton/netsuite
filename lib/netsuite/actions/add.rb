@@ -77,7 +77,11 @@ module NetSuite
           @errors = response.errors
 
           if response.success?
-            @internal_id = response.body[:@internal_id]
+            begin
+              @internal_id = response.body[:@internal_id]
+            rescue StandardError => e
+              puts "The request was successful, but no internal_id was returned.  (#{e})"
+            end
             true
           else
             false
